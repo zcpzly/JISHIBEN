@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-COMPATIBLE">
+    <title>移动端应用1</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<!-- Swiper -->
+<div class="main">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(img/125.jpg); background-size:420px 350px">备忘录</div>
+            <div class="swiper-slide" style="background-image:url(img/126.jpg); background-size:420px 350px"></div>
+            <div class="swiper-slide" style="background-image:url(img/127.jpg); background-size:420px 350px"></div>
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+    <div class="btn">
+        <div class="wei active">未完成</div>
+        <div class="finish">已完成</div>
+    </div>
+    <div class="content">
+        <ul>
+            <li>
+                <time>
+                    <span>2017-11-2</span>
+                    <span>17:07:45</span>
+                </time>
+                <p>今天的作业是。。。</p>
+                <i>0</i>
+            </li>
+        </ul>
+    </div>
+    <div class="add">添加</div>
+</div>
+<div class="mask">
+    <div class="edit">
+        <textarea name="" id="text"></textarea>
+        <input type="button" id="button" value="提交">
+        <div class="shanchu">X</div>
+    </div>
+</div>
+
+
+
+<!-- Swiper JS -->
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/hammer.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+//    var maScroll=new IScroll(".content",{
+//        scrollbars:true,
+//    })
+
+
+
+
+
+
+    $(".btn div").click(function(){
+        $(".btn div")
+                .removeClass("active")
+                .filter(this)
+                .addClass("active");
+    });
+
+    $(".add").click(function () {
+        $(".main")
+                .css("filter","blur(2px)")
+                .next().show().find(".edit")
+                .delay(500)
+                .queue(function () {$(this)
+                    .addClass("show")
+                    .dequeue();
+                    $("#text")[0].focus()
+        });
+    });
+    function getdata() {
+        return localStorage.todo?JSON.parse(localStorage.todo):[];
+    }
+    function savedata(data) {
+        localStorage.todo=JSON.stringify(data);
+    }
+    $("#button").click(function () {
+        var text=$("#text").val();
+        $("#text").val("");
+        if(text===""){
+            return;
+        }
+        var time=new Date().getTime();
+        var data=getdata();
+        data.push({con:text,time,isStar:0,isDown:0});
+        savedata(data);
+        rewrite();
+        $(".edit").removeClass("show").parent().hide().prev().css("filter","");
+
+    });
+    $("#close").click(function () {
+        $("#editarea")
+                .removeClass("show")
+                .parent()
+                .hide()
+                .prev()
+                .css("filter","")
+    })
+    function rewrite() {
+        var data=getdata();
+        $(".content ul").empty();       //清除所有子节点
+        data.reverse();
+        var str="";
+        $.each(data,function (index,val) {
+            str+=" <li> <time> <span>2017-11-2</span> <span>17:07:45</span> </time><p>"+val.con+"</p><i>0</i> </li>"
+        });
+        $(".content ul").html(str);
+    }
+    rewrite();
+    function getDate(ms) {
+        var date= new Date();
+        date.setTime(ms);
+        var year=date.getFullYear();
+        var month=addZero(date.getMonth()+1);
+        var day=addZero(date.getDate());
+        return year+"-"+month+"-"+day;
+    }
+    function getTime(ms) {
+        var date=new Date();
+        date.setTime(ms);
+        var hour=addZero(date.getHours());
+        var minute=addZero(date.getMinutes());
+//        var
+    };
+    function addZero(num) {
+        return num<10?"0"+num:num;
+
+    }
+
+//    function addEvent() {
+//        $(".content li").each(function (index,ele) {
+//            var hammer=new Hammer(ele);
+//            var mx;
+//            var state="start";
+//            hammer.on("panstart",function (e) {
+//                $(ele).css("transition","all 0.5s")
+//            });
+//            hammer.on("pan",function (e) {
+//                mx=e.deltaX;
+//                if(state==="start"){
+//                    if(mx>0){
+//                        return;
+//                    }
+//                }
+//                if(state==="end"){
+//                    if(){
+//
+//                    }
+//                }
+//            })
+//        })
+//    }
+    //点击完成     用事件委派
+    $(".content").on("click","right",function () {
+        var data=getData();
+        var index=$(this).parent().attr("id");
+        data.reverse();
+        data[index].isDone=1;
+        data.reverse();
+        saveData(data);
+        reWrite();
+    })
+//点击星号   加颜色
+//    $(".content").on("click","i",function () {
+//        var data=getData();
+//        var index=$(this).parent().attr("id");
+//        data.reverse();
+//        data[index].isDone=
+//    })
+    //点击删除
+    $(".content").on("click","delete",function () {
+        var data=getData();
+        var index=$(this).parent().attr("id");
+        data.reverse();
+        data.splice(index,1)
+        data.reverse();
+        saveData(data);
+        reWrite();
+    })
+</script>
+</html>

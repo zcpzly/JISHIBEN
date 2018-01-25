@@ -1,0 +1,176 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: none;
+}
+html{
+    font-size: 100px;
+    width: 100%;
+    height: 100%;
+}
+@media screen and (min-width: 375px){
+    html{
+        font-size: 50px;
+    }
+}
+
+body {
+    height: 100%;
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size:0.14rem;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+.swiper-container {
+    width: 100%;
+    height: 3rem;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 0.2rem;
+    background: #fff;
+    color: #fff;
+    height:3rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.btn{
+    width: 100%;
+    height:1rem;
+    display: flex;
+    justify-content: space-around;
+    margin: 0.2rem 0;
+}
+.btn div{
+    width:3rem;
+    height: 1rem;
+    border: 1px solid #333;
+    border-radius: 0.2rem;
+    text-align: center;
+    line-height: 1rem;
+    font-size: .2rem;
+}
+.btn .wei.active{
+    background: #514980;
+    color: #fff;
+}
+.btn .finish.active{
+    background: #514980;
+    color: #fff;
+}
+
+
+
+.content{
+    width: 100%;
+    height:calc(100% - 5rem);
+    background: #ccc;
+}
+.content ul li{
+    padding: 0 0.2rem;
+    width: 95%;
+    border-radius: 0.2rem;
+    height: 1rem;
+    background: #fff;
+    line-height: 1rem;
+    display: flex;
+    color: #000;
+    justify-content:space-around;
+}
+
+.mask{
+    width: 5rem;
+    height:5rem;
+    background: #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 20px;
+    display: none;
+}
+.mask .edit{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 20px;
+}
+@keyframes show{
+    0%{
+        transform:scale(0.5,0.5);
+    }
+    100%{
+        transform: scale(1,1);
+    }
+}
+.show{
+    animation: show 1s linear;
+}
+#text{
+    padding:10%;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+}
+#button{
+    width: 75%;
+    height: 20%;
+    position: absolute;
+    background: #ff3446;
+    color: #fff;
+    line-height: 25%;
+    text-align: center;
+    border-radius:0.2rem;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: none;
+    cursor: pointer;
+}
+.add{
+    width: 100%;
+    height:1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #ff3446;
+    font-size: 0.24rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1rem;
+}
+.main{
+    width: 100%;
+    height: 100%;
+}
+.shanchu{
+    width: 25px;
+    height: 25px;
+    background: #ccc;
+    position: absolute;
+    right:15px;
+    top:15px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+}
